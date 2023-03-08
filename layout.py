@@ -18,12 +18,14 @@ def create_layout(app):
                 ),
         html.Img(src=image_path, style={"width": "660px", "height": "400px"}),
         html.Img(src=image_path1, style={"width": "660px", "height": "400px"}),
-        dropdown.render(app)
+        dropdown.render(app),
+        dropdown.render1(app)
 ,       
     ],className="mt-4"),
         dbc.Row([
+            dbc.Col(bar_charts.render1(app),lg=6),
+            dbc.Col(bar_charts.render2(app),lg=6),
             dbc.Col(scatter_charts.render(app),lg=12),
-            dbc.Col(bar_charts.render(app),lg=6),
-            dbc.Col(bar_charts.render1(app),lg=6)
+            dbc.Col(bar_charts.render(app),lg=12)
         ],className="mt-4")
     ])
