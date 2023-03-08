@@ -4,9 +4,9 @@ PATH = "/Users/junyuwu/China Starbucks /components/starbucks.csv"
 df = pd.read_csv(PATH)
 df["closeTime"].fillna("23:00:00", inplace=True)
 df["openTime"].fillna("07:30:00", inplace=True)
-df['hasArtwork'] = df['hasArtwork'].apply(lambda x:10000 if x=="True" else 1)
 
 def get_data():
+    df['hasArtwork'] = df['hasArtwork'].apply(lambda x:10000 if x=="True" else 1)
     return df
 
 def get_city():
@@ -21,15 +21,15 @@ def get_opentime():
     return listopen
 
 
-def get_opentime_city():
-    byopen = df.groupby("openTime")["city"].value_counts().to_frame()
+def get_opentime_num():
+    byopen = df["openTime"].value_counts().to_frame()
     return byopen
 
 def get_closetime():
     byclose = df.groupby("closeTime")["city"].value_counts().to_frame()
-    listclose =list(set(byclose.index.tolist()))
+    listclose =sorted(list(set(byclose.index.get_level_values('closeTime').tolist())))
     return listclose
 
-def get_closetime_city():
-    byclose = df.groupby("closeTime")["city"].value_counts().to_frame()
+def get_closetime_num():
+    byclose = df["closeTime"].value_counts().to_frame()
     return byclose
